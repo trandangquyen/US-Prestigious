@@ -22,7 +22,8 @@
                 1000:{
                     items:1
                 }
-            }
+            },
+            onDragged: callback
         })
         $('.next-cont').click(function() {
             $('.owl-carousel').trigger('next.owl.carousel');
@@ -44,6 +45,34 @@
             }
         })
     }
+    function callback(event) {
+        if ($('.cover-carousel .owl-item:first-child').hasClass('active')) {
+            $('body').addClass('no-scroll');
+        }
+        else {
+            $('body').removeClass('no-scroll');
+        }
+    }
+    function clickGotoSection() {
+        /* ------- Smooth scroll ------- */
+        $("a.next").on("click", function (event) {
+            console.log($(this.hash).offset().top);
+            event.preventDefault();
+            $("html,body").animate({
+                scrollTop: $(this.hash).offset().top
+            }, 800);
+        });
+    }
+    $("section").swipe( {
+      swipeUp:function(event, direction, distance, duration) {
+        console.log("You swiped " + direction);;
+        var positonScrollTo = $(this).find('a.next').hash;
+        console.log (positonScrollTo);
+      },
+      swipeDown:function(event, direction, distance, duration) {
+        console.log("You swiped " + direction) 
+      }
+    });
     /* ----------------------------------------------- */
     /* ------------- FrontEnd Functions -------------- */
     /* ----------------------------------------------- */
@@ -51,5 +80,6 @@
     /* OnLoad Page */
     $(document).ready(function($) {
         runslideHomeCover();
+        clickGotoSection();
     });
 })(jQuery);
