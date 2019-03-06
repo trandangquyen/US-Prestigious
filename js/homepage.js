@@ -62,7 +62,15 @@
         //         scrollTop: $(this.hash).offset().top
         //     }, 800);
         // });
+        // $(window).scroll(function() {
+        //     clearTimeout($.data(this, 'scrollTimer'));
+        //     $.data(this, 'scrollTimer', setTimeout(function() {
+        //         // do something
+        //         console.log("Haven't scrolled in 250ms!");
+        //     }, 250));
+        // });
         $('section').on('touchend', function(event) {
+            // event.stopImmediatePropagation();
             console.log('section position: '+$(this).offset().top);
             console.log('window position: '+$(window).scrollTop());
             console.log('window height: '+$(window).outerHeight( true ));
