@@ -55,24 +55,64 @@
     }
     function clickGotoSection() {
         /* ------- Smooth scroll ------- */
-        $("a.next").on("click", function (event) {
-            console.log($(this.hash).offset().top);
-            event.preventDefault();
-            $("html,body").animate({
-                scrollTop: $(this.hash).offset().top
-            }, 800);
+        // $("a.next").on("click", function (event) {
+        //     // console.log($(this.hash).offset().top);
+        //     event.preventDefault();
+        //     $("html,body").animate({
+        //         scrollTop: $(this.hash).offset().top
+        //     }, 800);
+        // });
+        $('section').on('touchend', function(event) {
+            console.log('section position: '+$(this).offset().top);
+            console.log('window position: '+$(window).scrollTop());
+            console.log('window height: '+$(window).outerHeight( true ));
+            var sectionPosition = $(this).offset().top;
+            var prevElm = $(this).find('a.next').data('prev');
+            if (prevElm) {
+                var prevPosition = $(prevElm).offset().top || 0;
+            }
+            var nexElm = $(this).find('a.next').attr('href');
+            console.log(nexElm);
+            if (nexElm) {
+                var nextPositoin = $(nexElm).offset().top || 0;
+            }
+            console.log('next position: '+nextPositoin);       
+            var windowPosition = $(window).scrollTop();
+            var windowHeight = $(window).outerHeight( true );
+            var id = event.target;
+            console.log(id);
+            console.log(id.offsetParent.id);
+            if ($(id).is('.chevron') || $(id).parent().is('.next') ) {
+                console.log('21890');
+                event.preventDefault();
+                $("html,body").animate({
+                    scrollTop: nextPositoin
+                }, 800);
+            }
+            else {
+                if ( (windowPosition - sectionPosition)  >= windowHeight/5) {
+                    $("html,body").animate({
+                        scrollTop: nextPositoin
+                    }, 800);
+                }
+                else if ( (windowPosition - sectionPosition) <= -windowHeight/5) {
+                    $("html,body").animate({
+                        scrollTop: prevPosition
+                    }, 800);
+                }
+                else {
+                    $("html,body").animate({
+                        scrollTop: sectionPosition
+                    }, 800);
+                }
+            }           
+
         });
     }
-    $("section").swipe( {
-      swipeUp:function(event, direction, distance, duration) {
-        console.log("You swiped " + direction);;
-        var positonScrollTo = $(this).find('a.next').hash;
-        console.log (positonScrollTo);
-      },
-      swipeDown:function(event, direction, distance, duration) {
-        console.log("You swiped " + direction) 
-      }
-    });
+    // $(document).scroll(function(){
+    //     console.log($(window).scrollTop());
+
+    // });
     /* ----------------------------------------------- */
     /* ------------- FrontEnd Functions -------------- */
     /* ----------------------------------------------- */
