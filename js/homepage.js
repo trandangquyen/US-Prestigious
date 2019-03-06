@@ -25,8 +25,10 @@
             },
             onDragged: callback
         })
-        $('.next-cont').click(function() {
+        $('.next-cont').click(function(event) {
             $('.owl-carousel').trigger('next.owl.carousel');
+            $('body').removeClass('no-scroll');
+
         })
         $('.cv-content').owlCarousel({
             loop:false,
@@ -71,6 +73,7 @@
         // });
         $('section').on('touchend', function(event) {
             // event.stopImmediatePropagation();
+            $("html,body").animate().stop();
             console.log('section position: '+$(this).offset().top);
             console.log('window position: '+$(window).scrollTop());
             console.log('window height: '+$(window).outerHeight( true ));
@@ -92,26 +95,30 @@
             console.log(id.offsetParent.id);
             if ($(id).is('.chevron') || $(id).parent().is('.next') ) {
                 console.log('21890');
-                event.preventDefault();
+                // event.preventDefault();
                 $("html,body").animate({
                     scrollTop: nextPositoin
-                }, 800);
+                }, 850);
+                $(window).unbind('scroll');
             }
             else {
-                if ( (windowPosition - sectionPosition)  >= windowHeight/5) {
+                if ( (windowPosition - sectionPosition)  >= 20) {
                     $("html,body").animate({
                         scrollTop: nextPositoin
-                    }, 800);
+                    }, 850);
+                    $("html,body").unbind('scroll');
                 }
-                else if ( (windowPosition - sectionPosition) <= -windowHeight/5) {
+                else if ( (windowPosition - sectionPosition) <= -20) {
                     $("html,body").animate({
                         scrollTop: prevPosition
-                    }, 800);
+                    }, 850);
+                    $("html,body").unbind('scroll');
                 }
                 else {
                     $("html,body").animate({
                         scrollTop: sectionPosition
-                    }, 800);
+                    }, 850);
+                    $("html,body").unbind('scroll');
                 }
             }           
 
