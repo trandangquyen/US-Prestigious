@@ -28,7 +28,11 @@
         $('.next-cont').click(function() {
             $('.owl-carousel').trigger('next.owl.carousel');
             $('body').removeClass('no-scroll');
-
+            callback();
+        })
+        $('.back-home').click(function() {
+            $('body').addClass('no-scroll');
+            callback();
         })
         $('.cv-content').owlCarousel({
             loop:false,
@@ -50,11 +54,27 @@
     function callback(event) {
         if ($('.cover-carousel .owl-item:first-child').hasClass('active')) {
             $('body').addClass('no-scroll');
+            $.fn.fullpage.destroy('all');         
         }
         else {
             $('body').removeClass('no-scroll');
+            if ( $( 'html' ).hasClass( 'fp-enabled' ) ) {
+                return;
+            }
+            fullPage();
         }
     }
+    function clickGotoNextSection() {
+        $("a.next").on("click", function (event) {
+            event.preventDefault();
+            var nexElm = $(this).attr('href');
+            console.log(nexElm);
+            console.log($(nexElm).offset().top);
+            $("html,body").animate({
+                scrollTop: $(nexElm).offset().top
+            }, 800);
+        });
+    } 
     function clickGotoSection() {
         /* ------- Smooth scroll ------- */
         // $("a.next").on("click", function (event) {
@@ -132,8 +152,36 @@
             center: true,
             items: 1.3,
             loop: true,
-            margin: itemMargin,
-            onDragged: callback
+            margin: itemMargin
+        });
+    }
+    function fullPage() {
+        console.log(123);
+        $('#fullpage').fullpage({
+            // scrollOverflow: true,
+            verticalCentered: false,
+            // anchors: ['our-services', 'core-value', 'our-teams', 'service-process', 'our-archive', 'success-cases'],
+            navigation: false,
+            afterLoad: function(anchorLink, index){
+               // $('#fp-nav ul li').eq(4).hide();
+                if(index  == 1){
+                    $('#fp-nav').css('opacity',0);
+                }
+            },            
+            onLeave: function(index,nextIndex, direction){
+                if(index == 1){
+                    $('#fp-nav').css('opacity',1);                     
+                }
+                if(nextIndex  == 1){
+                    $('#fp-nav').css('opacity',0);
+                } 
+                $('.nav .mainul a').removeClass('on')
+                if(nextIndex != 7){                
+                    $($('.nav .mainul a')[nextIndex-1]).addClass('on')
+                }
+            },  
+            afterRender: function(){ 
+            }
         });
     }
     /* ----------------------------------------------- */
@@ -143,7 +191,9 @@
     /* OnLoad Page */
     $(document).ready(function($) {
         runslideHomeCover();
-        clickGotoSection();
+        // clickGotoSection();
+        // clickGotoNextSection();
         runOwlCarousel();
+        // fullPage();
     });
 })(jQuery);
