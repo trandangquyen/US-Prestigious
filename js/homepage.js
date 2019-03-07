@@ -25,7 +25,7 @@
             },
             onDragged: callback
         })
-        $('.next-cont').click(function(event) {
+        $('.next-cont').click(function() {
             $('.owl-carousel').trigger('next.owl.carousel');
             $('body').removeClass('no-scroll');
 
@@ -82,6 +82,7 @@
             if (prevElm) {
                 var prevPosition = $(prevElm).offset().top || 0;
             }
+            console.log('Prev position: '+prevPosition);  
             var nexElm = $(this).find('a.next').attr('href');
             console.log(nexElm);
             if (nexElm) {
@@ -94,40 +95,47 @@
             console.log(id);
             console.log(id.offsetParent.id);
             if ($(id).is('.chevron') || $(id).parent().is('.next') ) {
-                console.log('21890');
-                // event.preventDefault();
+                event.preventDefault();
                 $("html,body").animate({
                     scrollTop: nextPositoin
-                }, 850);
-                $(window).unbind('scroll');
+                }, 650);
+                // $(window).unbind('scroll');
             }
             else {
-                if ( (windowPosition - sectionPosition)  >= 20) {
+                if ( (windowPosition - sectionPosition)  >= 100) {
                     $("html,body").animate({
                         scrollTop: nextPositoin
-                    }, 850);
-                    $("html,body").unbind('scroll');
+                    }, 650);
+                    // $("html,body").unbind('scroll');
                 }
-                else if ( (windowPosition - sectionPosition) <= -20) {
+                else if ( (windowPosition - sectionPosition) <= -100) {
                     $("html,body").animate({
                         scrollTop: prevPosition
-                    }, 850);
-                    $("html,body").unbind('scroll');
+                    }, 650);
+                    // $("html,body").unbind('scroll');
                 }
                 else {
                     $("html,body").animate({
                         scrollTop: sectionPosition
-                    }, 850);
-                    $("html,body").unbind('scroll');
+                    }, 650);
+                    // $("html,body").unbind('scroll');
                 }
             }           
 
         });
     }
-    // $(document).scroll(function(){
-    //     console.log($(window).scrollTop());
-
-    // });
+    function runOwlCarousel() {
+        var windowWidth = $(window).width();
+        var itemMargin = 0;
+        itemMargin = (windowWidth <= 480) ? 20 : 40;
+        $('.offer-slider').owlCarousel({
+            center: true,
+            items: 1.3,
+            loop: true,
+            margin: itemMargin,
+            onDragged: callback
+        });
+    }
     /* ----------------------------------------------- */
     /* ------------- FrontEnd Functions -------------- */
     /* ----------------------------------------------- */
@@ -136,5 +144,6 @@
     $(document).ready(function($) {
         runslideHomeCover();
         clickGotoSection();
+        runOwlCarousel();
     });
 })(jQuery);

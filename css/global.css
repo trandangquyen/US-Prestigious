@@ -218,7 +218,7 @@ img {
 /* Start media screen */
 @media (max-width: 768px) {
   html {
-    font-size: 60%; }
+    font-size: 70%; }
 
   .page {
     width: 96.5%; }
@@ -229,7 +229,7 @@ img {
     padding: 0 10px; } }
 @media (max-width: 480px) {
   html {
-    font-size: 60%; }
+    font-size: 70%; }
 
   .container {
     width: 100%;
