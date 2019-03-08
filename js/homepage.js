@@ -34,22 +34,7 @@
             $('body').addClass('no-scroll');
             callback();
         })
-        $('.cv-content').owlCarousel({
-            loop:false,
-            margin:10,
-            nav:false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:1
-                },
-                1000:{
-                    items:1
-                }
-            }
-        })
+        
     }
     function callback(event) {
         if ($('.cover-carousel .owl-item:first-child').hasClass('active')) {
@@ -154,13 +139,31 @@
             loop: true,
             margin: itemMargin
         });
+        $('.cv-content').owlCarousel({
+            loop:false,
+            margin:10,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:1
+                }
+            }
+        })
     }
     function fullPage() {
         console.log(123);
         $('#fullpage').fullpage({
             // scrollOverflow: true,
+            touchSensitivity: 15,
             verticalCentered: false,
-            // anchors: ['our-services', 'core-value', 'our-teams', 'service-process', 'our-archive', 'success-cases'],
+            fitToSectionDelay: 300,
+            anchors: ['our-services', 'core-value', 'our-teams', 'service-process', 'our-archive', 'success-cases','examples'],
             navigation: false,
             afterLoad: function(anchorLink, index){
                // $('#fp-nav ul li').eq(4).hide();
@@ -190,10 +193,10 @@
 
     /* OnLoad Page */
     $(document).ready(function($) {
-        runslideHomeCover();
+        // runslideHomeCover();
         // clickGotoSection();
         // clickGotoNextSection();
         runOwlCarousel();
-        // fullPage();
+        fullPage();
     });
 })(jQuery);

@@ -167,13 +167,13 @@ section {
 .core-value {
 	.owl-stage-outer {
 		border: solid 1px rgba(255, 255, 255, 0.5);
+		height: 67vh;
 	}
 	.cv-content {
 		padding: 40px 20px;
 	}
 	.cv-item {		
-		padding: 15px;
-		height: 67vh;
+		padding: 15px;		
 		h3 {
 			font-size: 1.4rem;
 			text-align: justify;
@@ -741,6 +741,13 @@ section {
 }
 .owl-theme .owl-dots .owl-dot.active span {
 	background-color: #f8ce43;
+}
+.owl-carousel.owl-drag .owl-item {
+	height: 100vh;
+	overflow: hidden; 
+}
+.fp-controlArrow {
+	display: none;
 }
 // next button
 .next {

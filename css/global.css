@@ -229,7 +229,7 @@ img {
     padding: 0 10px; } }
 @media (max-width: 480px) {
   html {
-    font-size: 70%; }
+    font-size: 60%; }
 
   .container {
     width: 100%;
