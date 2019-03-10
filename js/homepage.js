@@ -184,30 +184,43 @@
         });
     }
     function getJsonTutorData() {
+        var items = [];
+        var elementBeginLoop = 0;
+        var elementEndLoop = 9;
+        $.getJSON("ajax/tutor.js", function(result){
+            var arrLength = result.tutors.length
+            elementEndLoop = (elementEndLoop <= arrLength) ? elementEndLoop : arrLength-1;
+            for (var i = elementBeginLoop; i <= elementEndLoop ; i++) {
+                items.push("<div class='tt-item'>"+
+                    "<a class='tt-avatar' href=''><img src='"+result.tutors[i].avatar+"' alt=''></a>"+
+                    "<div class='tt-head-info'><h3 class='name'>"+result.tutors[i].name+
+                    "</h3><div class='level'>"+result.tutors[i].level+"</div></div>"+
+                    "<div class='tt-main-info'>"+
+                    result.tutors[i].info+
+                    "</div></div>");
+            }
+            $(".tt-details-wrap").html($(items.join("")));
+        });
         $(".quantum li").click(function(){
             var items = [];
             var elementIndex = $(this).index();
             var elementBeginLoop = $(this).index()*10;
-            console.log(elementIndex);
             var elementEndLoop = elementIndex*10+9;
-            console.log(elementEndLoop);
+            $(this).addClass('active').siblings().removeClass('active');
             $.getJSON("ajax/tutor.js", function(result){
                 var arrLength = result.tutors.length
-                console.log(arrLength) 
                 elementEndLoop = (elementEndLoop <= arrLength) ? elementEndLoop : arrLength-1;
-                console.log(elementEndLoop) 
                 for (var i = elementBeginLoop; i <= elementEndLoop ; i++) {
-                    console.log(result.tutors[i]);
-                    console.log(result.tutors[i].name);
-                    items.push("<div class='tt-item'><a class='tt-avatar' href=''><img src='images/mem-image34.png' alt=''></a><div class='tt-head-info'><h3 class='name'>"+result.tutors[i].name+"</h3><div class='level'>普林斯顿大学，芝加哥大学</div></div><div class='tt-main-info'><p>Colin导师非常热衷于帮助别人发掘他们的真正潜力，不管是大学申请还是其他方面。在普林斯顿大学修读人类学专业后，他在先后在纽约和中国工作和生活。Colin导师在一来到中国时是为一家非营利性组织工作，在中国云南一处偏远的地区支教。在这之后，他来到了北京并担任国内某大型留学机构的美国高端留学部外方总经理，帮助中国学生实现美国留学的梦想。在2016年，Colin回到美国赴芝加哥大学攻读MBA学位。在这期间，Colin同时为日本的乐天公司工作，在新产品发展部门负责新产品的市场进入策略工作，负责两个新产品线的全球扩展策略的计划和实施。在纽约，他的工作是管理咨询为世界500强的制药公司提供策略过程，系统和决策方面的咨询服务。</p><p>申请指导也和工作有异曲同工之处，Colin导师能申请者真诚讲述他们的亲身经历时发现他们的优势。多年的工作经验中，他得出的经验是无论背景如何，申请者只有专注于他们自己的故事，价值和经历，而非发空心思猜测招生委员会的喜好，才能成功。</p><p>闲暇时，Colin导师则喜欢健身，撸猫和开发新菜式，甜点等。</p></div></div>");
-
-                    $.each(result.tutors[i], function(i, field){
-                        // items.push("<div class='tt-item'><a class='tt-avatar' href=''><img src='images/mem-image34.png' alt=''></a><div class='tt-head-info'><h3 class='name'>"++"</h3><div class='level'>普林斯顿大学，芝加哥大学</div></div><div class='tt-main-info'><p>Colin导师非常热衷于帮助别人发掘他们的真正潜力，不管是大学申请还是其他方面。在普林斯顿大学修读人类学专业后，他在先后在纽约和中国工作和生活。Colin导师在一来到中国时是为一家非营利性组织工作，在中国云南一处偏远的地区支教。在这之后，他来到了北京并担任国内某大型留学机构的美国高端留学部外方总经理，帮助中国学生实现美国留学的梦想。在2016年，Colin回到美国赴芝加哥大学攻读MBA学位。在这期间，Colin同时为日本的乐天公司工作，在新产品发展部门负责新产品的市场进入策略工作，负责两个新产品线的全球扩展策略的计划和实施。在纽约，他的工作是管理咨询为世界500强的制药公司提供策略过程，系统和决策方面的咨询服务。</p><p>申请指导也和工作有异曲同工之处，Colin导师能申请者真诚讲述他们的亲身经历时发现他们的优势。多年的工作经验中，他得出的经验是无论背景如何，申请者只有专注于他们自己的故事，价值和经历，而非发空心思猜测招生委员会的喜好，才能成功。</p><p>闲暇时，Colin导师则喜欢健身，撸猫和开发新菜式，甜点等。</p></div></div>");
-                        // console.log(i + "vs" + field[0])
-                        // $(".tt-details-wrap").append(field + " ");
-                    });
+                    items.push("<div class='tt-item'>"+
+                        "<a class='tt-avatar' href=''><img src='"+result.tutors[i].avatar+"' alt=''></a>"+
+                        "<div class='tt-head-info'><h3 class='name'>"+result.tutors[i].name+
+                        "</h3><div class='level'>"+result.tutors[i].level+"</div></div>"+
+                        "<div class='tt-main-info'>"+
+                        result.tutors[i].info+
+                        "</div></div>");
                 }
-                $(items.join("")).appendTo($(".tt-details-wrap"));
+                // $(items.join("")).appendTo($(".tt-details-wrap"));
+                $(".tt-details-wrap").html($(items.join("")));
                 
             });
         });
