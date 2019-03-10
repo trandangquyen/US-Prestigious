@@ -102,7 +102,7 @@
     function runOwlCarousel() {
         var windowWidth = $(window).width();
         var itemMargin = 0;
-        itemMargin = (windowWidth <= 480) ? 20 : 40;
+        itemMargin = (windowWidth <= 480) ? 10 : 20;
         $('.offer-slider').owlCarousel({
             center: true,
             items: 1.3,
