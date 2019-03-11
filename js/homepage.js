@@ -167,21 +167,9 @@
             touchSensitivity: 15,
             verticalCentered: false,
             fitToSectionDelay: 300,
-            anchors: ['our-services', 'core-value', 'our-teams', 'service-process', 'our-archive', 'success-cases','examples','contact'],
-            navigation: false,
-            afterLoad: function(anchorLink, index){
-            },            
-            onLeave: function(index,nextIndex, direction){
-            },  
-            afterRender: function(){ 
-            }  
-        });
-    }
-    //adding the action to the button on the home page
-    function moveToNextSlide() {
-        $(document).on('click', '#moveTo', function(){
-          $.fn.fullpage.moveTo('our-services', 1);
-        });
+            anchors: ['home-cover','our-services', 'core-value', 'our-teams', 'service-process', 'our-archive', 'success-cases','examples','contact'],
+            navigation: false 
+        });        
     }
     function getJsonTutorData() {
         var items = [];
@@ -225,6 +213,24 @@
             });
         });
     }
+    function swipeToChangeUrl() {
+        $("#std-success1").swipe( {
+            //Generic swipe handler for all directions
+            swipeRight:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
+                window.location.href = 'success-dt1.html';
+            },
+        });
+        $("#std-success2").swipe( {
+            //Generic swipe handler for all directions
+            swipeRight:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
+                window.location.href = 'success-dt2.html';
+            },
+        });
+        $('.back-home').click(function(event) {
+            event.preventDefault();
+            window.history.back();
+        });
+    }
     /* ----------------------------------------------- */
     /* ------------- FrontEnd Functions -------------- */
     /* ----------------------------------------------- */
@@ -235,7 +241,7 @@
         // clickGotoSection();
         runOwlCarousel();
         fullPage();
-        moveToNextSlide();
         getJsonTutorData();
+        swipeToChangeUrl();
     });
 })(jQuery);
