@@ -217,14 +217,37 @@
         $("#std-success1").swipe( {
             //Generic swipe handler for all directions
             swipeRight:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
-                window.location.href = 'success-dt1.html';
+                $(this).css({
+                    transform: 'translatex(-20px)',
+                    transition: 'all 0.35s ease-out'
+                });
+                setTimeout(function(){ window.location.href = 'success-dt1.html'; }, 300);
+                
             },
+            swipeLeft:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
+                $(this).css({
+                    transform: 'translatex(-20px)',
+                    transition: 'all 0.35s ease-out'
+                });
+                setTimeout(function(){ window.location.href = 'success-dt1.html'; }, 300);
+            }
         });
         $("#std-success2").swipe( {
             //Generic swipe handler for all directions
             swipeRight:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
-                window.location.href = 'success-dt2.html';
+                $(this).css({
+                    transform: 'translatex(-20px)',
+                    transition: 'all 0.35s ease-out'
+                });
+                setTimeout(function(){ window.location.href = 'success-dt2.html'; }, 300);
             },
+            swipeLeft:function(event, distance, duration, fingerCount, fingerData, currentDirection) {
+                $(this).css({
+                    transform: 'translatex(-20px)',
+                    transition: 'all 0.35s ease-out'
+                });
+                setTimeout(function(){ window.location.href = 'success-dt2.html'; }, 300);
+            }
         });
         $('.back-home').click(function(event) {
             event.preventDefault();
