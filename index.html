@@ -48,7 +48,7 @@
 			<section class="section core-value">
 				<div class="top-header">
 					<a href="index.html" class="back-home-el"><img src="images/template/fav.ico.svg" alt=""></a>
-					<h2>核心的价值</h2>
+					<h2>核心价值观</h2>
 				</div>
 				<div class="cv-content owl-carousel owl-theme wow fadeInUp" data-wow-delay="300ms">
 					<div class="cv-item">
@@ -333,36 +333,35 @@
 						<h3 class="office-name">伦敦</h3>
 						<ul>
 							<li><i class="icon-position" aria-hidden="true"></i>29 Threadneedle Street, London EC2R 8AY</li>
-							<li><i class="icon-phone" aria-hidden="true"></i>010-85925292</li>
 						</ul>
 					</div>
 					<div class="office-item">
 						<h3 class="office-name">曼彻斯特</h3>
 						<ul>
 							<li><i class="icon-position" aria-hidden="true"></i>3.37 Peter House, Oxford Street, Great Manchester, M1 5AN</li>
-							<li><i class="icon-phone" aria-hidden="true"></i>010-85925292</li>
 						</ul>
 					</div>
 					<div class="office-item">
 						<h3 class="office-name">北京</h3>
 						<ul>
 							<li><i class="icon-position" aria-hidden="true"></i>朝阳区东三环北路甲26号博瑞大厦A座4层A406</li>
-							<li><i class="icon-phone" aria-hidden="true"></i>010-85925292</li>
 						</ul>
 					</div>
 					<div class="office-item">
 						<h3 class="office-name">上海</h3>
 						<ul>
 							<li><i class="icon-position" aria-hidden="true"></i>上海市静安区北京西路968号嘉地中心7层705室</li>
-							<li><i class="icon-phone" aria-hidden="true"></i>010-85925292</li>
 						</ul>
 					</div>
 					<div class="office-item">
 						<h3 class="office-name">深圳</h3>
 						<ul>
 							<li><i class="icon-position" aria-hidden="true"></i>南山区后海大道2378号芒果网大厦5层A028</li>
-							<li><i class="icon-phone" aria-hidden="true"></i>010-85925292</li>
 						</ul>
+					</div>
+					<div class="contact-details">
+						联系方式
+						<div><i class="icon-phone" aria-hidden="true"></i>010-85925358</div>
 					</div>
 				</div>
 				<a href="https://jinshuju.net/f/nshgVO" class="online-chat wow fadeInUp" data-wow-delay="350ms"><i class=" wow bounce icon-chat" data-wow-duration="1.5s" data-wow-iteration="infinite" data-wow-delay="2000ms"></i>在线咨询</a>
@@ -537,12 +536,37 @@
 	<script src="js/jquery.touchSwipe.min.js"></script>
 	<!-- <script src="js/jquery.mobile-1.4.5.min.js"></script> -->
 	<script src="js/homepage.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 	<script> new WOW().init(); </script>
     <script>
     $(document).on("mobileinit", function(){
         $.mobile.ajaxEnabled=false;
         $.mobile.loadingMessage = false;
     });            
+    </script>
+    <script>
+      wx.config({
+        appId: 'wx188d39e81b6057de',
+        timestamp: '1552890248',
+        nonceStr: 'GD0aUmTZSYllQ3AP',
+        signature: 'f3f54b65f1649fd24f2ec55b4974557ffdb885ce',
+        jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo","onMenuShareQZone",
+            "chooseImage", "getNetworkType", "hideOptionMenu", "showOptionMenu", "hideMenuItems",
+            "showMenuItems", "hideAllNonBaseMenuItem", "showAllNonBaseMenuItem", "closeWindow"]
+      });
+
+      wx.ready(function(){
+        wx.updateAppMessageShareData({
+          title: '美国名校导师服务',
+          desc: '专注于英国私校精英教育领航计划，匠心定制，遇见未来！',
+          link: 'http://us.intergreat.com/',
+          imgUrl: 'http://us.intergreat.com/images/intergreat-us.svg',
+          success: function() {
+            //console.log('success');
+
+          }
+        })
+      });
     </script>
 </body>
 
